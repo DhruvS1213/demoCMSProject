@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<title>Home</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="admin.css">
+        <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	</head>
+	<body ng-app="fileUpload" class="container">
+		 <div id="colorstrip">
+         <div>
+         <img style="z-index:3;height:50px;width:160px;margin-left: 10px;" src="erricson.png" />
+        </div>
+        </div>
+        <br>
+
+        <div ng-controller="MyCtrl as up">
+            <div class="headingpart">
+                <div>
+                    <label>Enter Heading </label>
+                    <textarea ng-model="heading" name="userheading"></textarea>
+                    <script>
+                        var editor = CKEDITOR.replace( 'userheading' );
+                        editor.resize( '100%', '350' );
+                    </script>
+                </div>
+                <br>
+                <div>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchHeading(heading)" >Change Heading</button>
+                </div>
+            </div>
+            <br>
+            <div class="textpart">
+                <div>
+                    <label>Enter Textual Content</label>
+                    <textarea ng-model="data" name="usercontent"></textarea>
+                    <script>
+                        CKEDITOR.replace( 'usercontent' );
+                    </script>
+                </div>
+                <br>
+                <div>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchText(data)" >Upload Text</button>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="imagepart">
+            <form name="up.upload_form">
+                    <label>Select Image</label>
+                <input 
+                    type="file" 
+                    ngf-select 
+                    ng-model="up.file" 
+                    name="file" 
+                    ngf-pattern="'image/*'"
+                    accept="image/*" 
+                    ngf-max-size="20MB" 
+                    />
+                <br>
+                <div>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.submit(1)" >Upload Image</button>
+                </div>
+                <p>{{up.progressText1}}</p>
+                <progress class="progbar" min="0" value="{{up.imUploadProgress}}" max="100" ></progress>
+            </div>
+            
+            <br>
+
+            <div class="videopart">
+                <label>Select Video</label>
+                <input 
+                    type="file" 
+                    ngf-select 
+                    ng-model="up.file" 
+                    name="file" 
+                    ngf-pattern="'video/*'"
+                    accept="video/*"                     
+                />
+                <br>
+                <div>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.submit(2)" >Upload Video</button>
+                </div>
+                <p>{{up.progressText2}}</p>
+                <progress class="progbar" min="0" value="{{up.vidUploadProgress}}" max="100" ></progress>
+                
+             </div> 
+            </form>
+        
+        <br>
+                
+            <div style="padding:5px;" class="text-center">
+                <button type = "button" class = "btn btn-success" ng-click="up.preview()" >Preview Site</button>
+            </div>
+            <br>
+            <div id="footstrip">
+                <p class="footertext"> &copy; https://www.ericsson.com </p>
+            </div>    
+        </div>
+    </body>
+	
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
+</html>

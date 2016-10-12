@@ -1,0 +1,57 @@
+#colorstrip{
+    width: 100%; height: 50px;
+    
+    background-color: #06548A;
+}
+
+.headingpart{
+
+	border: solid;
+	border-color: black;
+	border-width:1px;
+	border-radius: 4px; 
+	padding:8px;
+}
+
+.textpart{
+
+	border: solid;
+	border-color: black;
+	border-width:1px;
+	border-radius: 4px; 
+	padding:8px;
+}
+
+.imagepart{
+
+	border: solid;
+	border-color: black;
+	border-width:1px;
+	border-radius: 4px; 
+	padding:8px;
+}
+
+.videopart{
+
+	border: solid;
+	border-color: black;
+	border-width:1px;
+	border-radius: 4px; 
+	padding:8px;
+}
+#footstrip{
+    width: 100%; height: 30px;
+    
+    background-color: #06548A;
+}
+
+.footertext{
+	text-align: center;
+	padding: 2px;
+	color: white;
+}
+
+.progbar{
+	width:650px;
+	height: 22px;
+}
