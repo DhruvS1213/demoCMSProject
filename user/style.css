@@ -1,0 +1,63 @@
+@font-face{font-family:ericsson_capital_ttregular;src:url(/fonts/ericssoncapitaltt-webfont.woff)}
+
+.eEricssonFont {
+    font-family: ericsson_capital_ttregular,Arial,sans-serif;
+}
+
+.frontIntro{
+    font-size: 7.2rem;
+    color: darkslateblue;
+}
+
+.textContent{
+    font-size: 1.7rem;
+}
+
+.videocontent{
+    padding-left: 20px;
+    
+}
+
+.video-js{
+    border-radius: 10px;
+}
+
+.part2{
+    padding-top: 20px;
+}
+.imgContent{
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+.imgCaption{
+    text-align: center;
+}
+
+.logoStyle{
+    width: 110px;
+    height: 50px;
+}
+
+.bottomLogo{
+    padding-left: 600px;
+}
+
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  .frontIntro{
+      font-size: 2rem;
+  }
+  .videocontent{
+      border-radius: 10px;
+      width: 200px;
+      height: 350px;
+  }
+
+  .bottomLogo{
+     padding-left: 500px;
+  }
+
+}
