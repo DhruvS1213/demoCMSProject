@@ -28,12 +28,47 @@ angular.module('fileDownload', ['ngSanitize'])
             console.log('error');
         });
 
-    vm.imageRequest1 = "http://localhost:3000/uploads/img.jpg";
-    vm.imageRequest2 = "http://localhost:3000/uploads/img.jpg";
-    vm.imageRequest3 = "http://localhost:3000/uploads/img.jpg";
-    
-    vm.videoSRC = "http://localhost:3000/uploads/vid.mp4?t="+ temp;
+   var tempImage1 = "http://localhost:3000/uploads/img-1.jpg";
+   
 
+   
+    $http({
+        method: 'GET',
+        url: "http://localhost:3000/uploads/img.jpg?imgNo="+encodeURIComponent(1)    
+    }).then(function successCallback(resp)
+        {
+            vm.imageRequest1 = "http://localhost:3000/uploads/img-1.jpg";
+            console.log('Image Retreival Success !!');
+        }, function errorCallback(response){
+            console.log(response.status);
+            
+        });
+
+    $http({
+        method: 'GET',
+        url: "http://localhost:3000/uploads/img.jpg?imgNo="+encodeURIComponent(2)
+    }).then(function successCallback(resp)
+        {
+            vm.imageRequest2 = "http://localhost:3000/uploads/img-2.jpg";
+            console.log('Image Retreival Success !!');
+        }, function errorCallback(response){
+            console.log(response.status);
+            
+        });
+
+    $http({
+        method: 'GET',
+        url: "http://localhost:3000/uploads/img.jpg?imgNo="+encodeURIComponent(3)    
+    }).then(function successCallback(resp)
+        {
+            vm.imageRequest3 = "http://localhost:3000/uploads/img-3.jpg";
+            console.log('Image Retreival Success !!');
+        }, function errorCallback(response){
+            console.log(response.status);
+            
+        });
+
+   vm.videoSRC = "http://localhost:3000/uploads/vid.mp4?t="+ temp;
 }])
     
 

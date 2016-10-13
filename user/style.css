@@ -5,7 +5,7 @@
 }
 
 .frontIntro{
-    font-size: 7.2rem;
+    font-size: 4.2rem;
     color: darkslateblue;
 }
 
@@ -13,9 +13,33 @@
     font-size: 1.7rem;
 }
 
+.textContent > p {
+    margin-bottom: 20px;
+}
+
+.no-padding{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-padding-left{
+    padding-left: 0;
+}
+
+.no-padding-right{
+    padding-right: 0;
+}
+
+.headContent{
+    margin-bottom: 25px;
+}
+
+.video-container {
+    padding-left: 30px;
+}
+
 .videocontent{
-    padding-left: 20px;
-    
+    width: 100%;
 }
 
 .video-js{
@@ -25,15 +49,32 @@
 .part2{
     padding-top: 20px;
 }
+
+.part2 img{
+    width: 100%;
+}
+
+.part2 .img-wrapper:first-child {
+    padding-right: 20px;
+}
+.part2 .img-wrapper:nth-child(2) {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.part2 .img-wrapper:last-child {
+    padding-left: 20px;
+}
 .imgContent{
     width: 200px;
-    height: 100px;
+    height: 150px;
     border-radius: 10px;
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
 .imgCaption{
     text-align: center;
+    margin-top: 10px;
+    font-size: 1.5rem;
 }
 
 .logoStyle{
@@ -42,7 +83,46 @@
 }
 
 .bottomLogo{
-    padding-left: 600px;
+    padding: 20px 0;
+}
+
+.video-container{
+    width: 250px; 
+    height: 400px; 
+}
+
+.video-container .video-js .vjs-big-play-button {
+    height: 2em;
+    width: 2em;
+    top: calc(50% - 1em);
+    left: calc(50% - 1em);
+    border-radius: 50%;
+}
+
+.video-container .video-js .vjs-big-play-button:before, .video-js .vjs-control:before, .video-js .vjs-modal-dialog, .vjs-modal-dialog .vjs-modal-dialog-content {
+    position: static;
+}
+
+.custom-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+}
+.custom-container:after {
+    height: 100%;
+    width: 100%;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    content: '';
+    display: block;
+    position: absolute;
+    top: 646px;
+    right: -69%;
+    z-index: -1;
+    background-color: #193066;
+    background-size: cover;
 }
 
 

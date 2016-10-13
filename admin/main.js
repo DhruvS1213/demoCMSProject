@@ -3,8 +3,10 @@ angular.module('fileUpload', ['ngFileUpload'])
 .controller('MyCtrl',['Upload','$window','$location', function(Upload,$window,$location){
     console.log('admin-view');
     var vm = this;
-   
+    
     vm.submit = function(contentType){
+        vm.imUploadProgress = 0;
+        vm.progressText1 = 0;
         if (vm.upload_form.file.$valid && vm.file) 
         {
             vm.upload(vm.file, contentType); 
