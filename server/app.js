@@ -4,7 +4,9 @@
     var app = express(); 
     var bodyParser = require('body-parser');
     var multer = require('multer');
+    var shell = require('shelljs');
     var imgNo = 1;
+    
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -26,16 +28,11 @@
             var datetimestamp = Date.now();
             
             var extension = file.originalname.split('.')[file.originalname.split('.').length -1];
-            if (extension == 'jpg' || extension == 'png') {
-                    // cb(null, 'img.' + extension);
-                    cb(null, 'img-'+ imgNo + '.' + extension);
-                    imgNo ++;    
-                    if(imgNo > 3){
-                        imgNo = 1;
-                    }
+            if (extension == 'jpg' || extension == 'png' || extension == 'jpeg' || extension == 'bmp' || extension == 'tiff') {
+                cb(null, file.originalname);
             }
             if (extension == 'mp4' || extension == 'ogv' || extension == 'wmv') {
-                cb(null, 'vid.' + extension);
+                cb(null, file.originalname);
             }
         }
     });
@@ -67,6 +64,7 @@
 
     app.post('/headingupload', function(req,res){
          var heading_usercontent = req.query.demo;
+             
          console.log(heading_usercontent);
          var datetime = Date.now();
          fs.writeFile('./uploads/heading'+ '.html', heading_usercontent,  function(err) {
@@ -151,7 +149,7 @@
    app.get('/uploads/img.jpg', function(req,res){
          var imgNo = req.query.imgNo;
          try{
-            console.log('Content Request: Image content ...')
+            console.log('Content Request: Image content ...');
             var stats = fs.statSync('./uploads/img-'+ imgNo + '.jpg');
             if(stats.isFile()){
                 res.writeHead(200);
