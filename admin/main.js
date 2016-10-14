@@ -1,6 +1,6 @@
-angular.module('fileUpload', ['ngFileUpload'])
+angular.module('authorModule', ['ngFileUpload'])
 
-.controller('MyCtrl',['Upload','$window','$location', '$http', function(Upload,$window,$location, $http){
+.controller('uploadCtrl',['Upload','$window','$location', '$http', function(Upload,$window,$location, $http){
     console.log('admin-view');
     var vm = this;
     vm.images = [];

@@ -11,7 +11,7 @@
 
 
 	</head>
-	<body ng-app="fileUpload" class="container">
+	<body ng-app="authorModule" class="container">
 		 <div id="colorstrip">
          <div>
          <img style="z-index:3;height:50px;width:160px;margin-left: 10px;" src="erricson.png" />
@@ -19,14 +19,20 @@
         </div>
         <br>
 
-        <div ng-controller="MyCtrl as up">
+        <div ng-controller="uploadCtrl as up">
             <div class="headingpart">
                 <div>
                     <label>Enter Heading </label>
                     <textarea ng-model="heading" name="userheading"></textarea>
                     <script>
-                        var editor = CKEDITOR.replace( 'userheading' );
-                        editor.resize( '100%', '350' );
+                        CKEDITOR.replace( 'userheading',
+	                    {
+                            toolbar :
+                            [
+                                { name: 'basicstyles', items : [ 'Bold','Italic' ] },
+                                { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] }
+                            ]
+                        });
                     </script>
                 </div>
                 <br>
