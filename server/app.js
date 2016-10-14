@@ -90,7 +90,7 @@
     });
 
     app.get('/getPage', function(req,res){
-        console.log('get html-content request made');
+        console.log('Content Request: Blog content ...');
         try{
             var stats = fs.lstatSync('./uploads/data.html');
             if(stats.isFile())
@@ -107,12 +107,12 @@
             res.writeHead(200, {"Content-Type": "text/html"});
             res.write(noContentHtml);
             res.end();
-            console.log('no data content exists');
+            console.log('Content Request Handled: No blog content added yet ...');
         }
     });
 
     app.get('/getHeading', function(req,res){
-        console.log('get heading-content request made');
+        console.log('Content Request : Blog Heading ...');
         try{
             var stats = fs.lstatSync('./uploads/heading.html');
             if(stats.isFile())
@@ -125,17 +125,17 @@
             }
         }
         catch(e){
-            var noContentHtml = '<p> No content Added yet </p>';
+            var noContentHtml = '<p> No Heading added yet </p>';
             res.writeHead(200, {"Content-Type": "text/html"});
             res.write(noContentHtml);
             res.end();
-            console.log('no heading content exists');
+            console.log('Content Request Handled: No blog heading added yet ...');
         }
    });
 
     app.get('/uploads/vid.mp4', function(req, res){
         try{
-            console.log('get video-content request made');
+            console.log('Content Request: Video content ...');
             var stats = fs.statSync('./uploads/vid.mp4');
             if(stats.isFile()){
                 res.writeHead(200);
@@ -143,7 +143,7 @@
             }
         }
         catch(e){
-            console.log('Video doesnt exist');
+            console.log('Content Request Handled: No video content found ...');
         }
         
     });
@@ -151,6 +151,7 @@
    app.get('/uploads/img.jpg', function(req,res){
          var imgNo = req.query.imgNo;
          try{
+            console.log('Content Request: Image content ...')
             var stats = fs.statSync('./uploads/img-'+ imgNo + '.jpg');
             if(stats.isFile()){
                 res.writeHead(200);
@@ -158,7 +159,7 @@
             }
         }
         catch(e){
-            console.log('Image doesnt exist');
+            console.log('Content Request Handled: No image content found ...');
         }
     });
 
