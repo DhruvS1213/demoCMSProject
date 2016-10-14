@@ -1,9 +1,10 @@
 angular.module('fileUpload', ['ngFileUpload'])
 
-.controller('MyCtrl',['Upload','$window','$location', function(Upload,$window,$location){
+.controller('MyCtrl',['Upload','$window','$location', '$http', function(Upload,$window,$location, $http){
     console.log('admin-view');
     var vm = this;
-    
+    vm.images = [];
+    var demourl = 'http://localhost:3000/uploads/'
     vm.submit = function(contentType){
         vm.imUploadProgress = 0;
         vm.progressText1 = 0;
@@ -37,6 +38,19 @@ angular.module('fileUpload', ['ngFileUpload'])
         alert("Data Successfully Uploaded"); 
     };
   
+    vm.remove = function(image) { 
+        console.log('delete');
+        var index = vm.images.indexOf(image);
+        console.log(index);
+        console.log(vm.images[index]);
+        var imagePath = vm.images[index];
+        vm.images.splice(index, 1);     
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/deleteImage?fileName='+ imagePath
+        });
+    }
+
     vm.upload = function (file, contentType) 
     {
        Upload.upload({
@@ -45,6 +59,12 @@ angular.module('fileUpload', ['ngFileUpload'])
         }).then(function (resp) { 
             if(resp.data.error_code === 0){ 
                 $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                console.log(resp.config.data.file.name);
+                name = resp.config.data.file.name;
+
+                console.log(demourl + name);
+                vm.images.push(demourl+name);
+                console.log(vm.images); 
             } else {
                 $window.alert('an error occured');
             }
