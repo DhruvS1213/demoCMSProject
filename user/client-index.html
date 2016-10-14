@@ -18,26 +18,28 @@
 
             <div class="clearfix">
                 <div class="col-md-8 no-padding-left">
+                    
                     <h1><p class="headContent" ng-bind-html="uv.userHeadingRequest"></p></h1>
                     <p class="textContent" ng-bind-html="uv.userContentRequest"></p>
                     <div class="part2 clearfix">
-                        <div class="col-md-4 no-padding img-wrapper">
-                            <img class="imgContent" ng-src="{{uv.imageRequest1}}" alt='No Image available'>
-                            <p class="imgCaption"> Demo Image 1 </p>
-                        </div>
-                        <div class="col-md-4 no-padding img-wrapper">
-                            <img class="imgContent" ng-src="{{uv.imageRequest2}}" alt='No Image available'>
-                            <p class="imgCaption"> Demo Image 2 </p>
-                        </div>
-                        <div class="col-md-4 no-padding img-wrapper">
-                            <img class="imgContent" ng-src="{{uv.imageRequest3}}" alt='No Image available'>
-                            <p class="imgCaption"> Demo Image 3 </p>
+                    <div id="slides_control">
+                        <div>
+                        <carousel interval="uv.myInterval">
+                            <slide ng-repeat="slide in uv.slides" active="slide.active">
+                                <img ng-src="{{slide.image}}">
+                                <div class="carousel-caption">
+                                    <h4>Demo Image {{$index+1}}</h4>
+                                </div>
+                            </slide>
+                        </carousel>
                         </div>
                     </div>
+                    </div>
                 </div>
+                
                 <div class="col-md-4 no-padding-right video-container">
                     <video id="my-video" class="video-js videocontent" controls preload="auto"
-                       poster="/img/videoPoster.jpg" data-setup="{}" height="400px" width="300px">
+                       poster="/img/videoPoster.jpg" data-setup="{}" height="400px" width="350px">
                          <source ng-src={{uv.videoSRC}} type='video/mp4'>
                     </video>
                 </div>
@@ -53,6 +55,7 @@
     
     </body>
 	<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
     <script src="http://vjs.zencdn.net/5.11.7/video.js"></script>
     <script type="text/javascript" src="umain.js"></script>

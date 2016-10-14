@@ -125,6 +125,19 @@
     background-size: cover;
 }
 
+#slides_control > div{
+  height: 200px;
+}
+img{
+  margin:auto;
+  width: 400px;
+}
+
+#slides_control{
+  margin-left: 200px;
+  position:absolute;
+  width: 400px;
+}
 
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
   .frontIntro{
