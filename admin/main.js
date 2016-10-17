@@ -5,6 +5,42 @@ angular.module('authorModule', ['ngFileUpload'])
     var vm = this;
     vm.images = [];
     var demourl = 'http://localhost:3000/uploads/'
+
+
+    $http({
+        method: 'GET',
+        url: '/getImageAddress'
+    }).then(function successCallback(response){
+        vm.images = response.data.split(',');
+    }, function errorCallback(error){
+        console.log('admin side: error in fetching image address');
+    });
+
+
+    $http({
+        method:'GET',
+        url: '/getHeading'
+    }).then(function successCallback(response){
+        console.log(response.data);
+        var div = document.createElement("div");
+        div.innerHTML = response.data;
+        vm.heading = div.textContent || div.innerText || "";
+    }, function errorCallback(error){
+        console.log(error);
+    });
+
+    $http({
+        method:'GET',
+        url: '/getPage'
+    }).then(function successCallback(response){
+        console.log(response.data);
+        var div = document.createElement("div");
+        div.innerHTML = response.data;
+        vm.data = div.textContent || div.innerText || "";
+    }, function errorCallback(error){
+        console.log(error);
+    });
+
     vm.submit = function(contentType){
         vm.imUploadProgress = 0;
         vm.progressText1 = 0;
@@ -16,7 +52,12 @@ angular.module('authorModule', ['ngFileUpload'])
     
     vm.preview = function()
     {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/sliderImg?imgArray='+vm.images
+        });
         $window.location.href = 'http://localhost:3000/user';
+        
     }
 
     vm.fetchText = function(data)

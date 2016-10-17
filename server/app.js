@@ -6,7 +6,8 @@
     var multer = require('multer');
     var shell = require('shelljs');
     var imgNo = 1;
-    
+    var imgArray;
+
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -92,6 +93,11 @@
        res.end(index); 
     });
 
+    app.get('/sliderImg', function(req, res){
+        imgArray = req.query.imgArray;
+        console.log(imgArray);
+    });
+
     app.get('/getPage', function(req,res){
         console.log('Content Request: Blog content ...');
         try{
@@ -148,7 +154,18 @@
         catch(e){
             console.log('Content Request Handled: No video content found ...');
         }
-        
+    });
+
+    app.get('/getImageAddress', function(req,res){
+        try{
+            if(imgArray.length != 0){
+                res.writeHead(200);
+                res.end(imgArray);
+            }
+        }
+        catch(e){
+            console.log(e);
+        }
     });
 
    app.get('/uploads/img.jpg', function(req,res){
@@ -165,6 +182,7 @@
             console.log('Content Request Handled: No image content found ...');
         }
     });
+
 
     
 

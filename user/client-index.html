@@ -25,8 +25,8 @@
                     <div id="slides_control">
                         <div>
                         <carousel interval="uv.myInterval">
-                            <slide ng-repeat="slide in uv.slides" active="slide.active">
-                                <img ng-src="{{slide.image}}">
+                            <slide ng-repeat="image in uv.imageArray track by $index">
+                                <img ng-src="{{image}}">
                                 <div class="carousel-caption">
                                     <h4>Demo Image {{$index+1}}</h4>
                                 </div>

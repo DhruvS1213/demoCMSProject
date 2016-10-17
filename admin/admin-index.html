@@ -23,7 +23,7 @@
             <div class="headingpart">
                 <div>
                     <label>Enter Heading </label>
-                    <textarea ng-model="heading" name="userheading"></textarea>
+                    <textarea ng-model="up.heading" name="userheading"></textarea>
                     <script>
                         CKEDITOR.replace( 'userheading',
 	                    {
@@ -37,21 +37,21 @@
                 </div>
                 <br>
                 <div>
-                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchHeading(heading)" >Change Heading</button>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchHeading(up.heading)" >Change Heading</button>
                 </div>
             </div>
             <br>
             <div class="textpart">
                 <div>
                     <label>Enter Textual Content</label>
-                    <textarea ng-model="data" name="usercontent"></textarea>
+                    <textarea ng-model="up.data" name="usercontent"></textarea>
                     <script>
                         CKEDITOR.replace( 'usercontent' );
                     </script>
                 </div>
                 <br>
                 <div>
-                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchText(data)" >Upload Text</button>
+                    <button type = "button" class = "btn btn-primary" ng-click="up.fetchText(up.data)" >Upload Text</button>
                 </div>
             </div>
 
