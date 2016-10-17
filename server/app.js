@@ -74,7 +74,12 @@
          });
     });
 
-    
+    app.get('/deleteImage', function(req,res){
+        var fileUrl = url.parse(req.query.fileName).path;
+        fs.unlinkSync('.'+fileUrl);
+    });
+
+
     app.get('/admin', function(req,res){
        var index = fs.readFileSync('../admin/admin-index.html');
        res.writeHead(200, {'Content-Type': 'text/html'});
