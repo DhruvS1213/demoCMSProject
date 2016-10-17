@@ -13,7 +13,15 @@ angular.module('authorModule', ['ngFileUpload'])
     }).then(function successCallback(response){
         console.log('images recieved successfully at admin side');
         //vm.images = response.data.split(',');
-        vm.images = response.data;
+        console.log(response.data.length);
+        console.log('empty-', response.data);
+        if(response.data[0] == ''){
+           console.log('No Images added to blog');
+        }else{
+            vm.images = response.data;
+        }
+        
+
     }, function errorCallback(error){
         console.log('admin side: error in fetching image address');
     });
@@ -102,12 +110,15 @@ angular.module('authorModule', ['ngFileUpload'])
         }).then(function (resp) { 
             if(resp.data.error_code === 0){ 
                 $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-                console.log(resp.config.data.file.name);
-                name = resp.config.data.file.name;
+                if(contentType == 1)
+                {
+                    console.log(resp.config.data.file.name);
+                    name = resp.config.data.file.name;
 
-                console.log(demourl + name);
-                vm.images.push(demourl+name);
-                console.log(vm.images); 
+                    console.log(demourl + name);
+                    vm.images.push(demourl+name);
+                    console.log(vm.images);
+                } 
             } else {
                 $window.alert('an error occured');
             }

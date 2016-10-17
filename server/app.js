@@ -32,7 +32,7 @@
                 cb(null, file.originalname);
             }
             if (extension == 'mp4' || extension == 'ogv' || extension == 'wmv') {
-                cb(null, file.originalname);
+                cb(null, 'vid.'+extension);
             }
         }
     });
