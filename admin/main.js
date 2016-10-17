@@ -58,7 +58,7 @@ angular.module('authorModule', ['ngFileUpload'])
         {
             vm.upload(vm.file, contentType); 
         }
-    }
+    };
     
     vm.preview = function()
     {
@@ -100,7 +100,15 @@ angular.module('authorModule', ['ngFileUpload'])
             method: 'GET',
             url: 'http://localhost:3000/deleteImage?fileName='+ imagePath
         });
-    }
+        console.log(vm.images.length);
+        if(vm.images.length == 0){
+            vm.images = [];    
+        }
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/selectedImages?imgArray='+ vm.images
+        });
+    };
 
     vm.upload = function (file, contentType) 
     {
@@ -145,7 +153,7 @@ angular.module('authorModule', ['ngFileUpload'])
                 }            
             });
         };
-}])
+}]);
 
 
     

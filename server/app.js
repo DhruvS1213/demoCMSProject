@@ -94,7 +94,7 @@
 
     app.get('/selectedImages', function(req, res){
         imgArray = req.query.imgArray;
-        console.log(imgArray);
+        console.log('recieved image array', imgArray);
         fs.writeFile('./uploads/selectedImages.txt', imgArray, 'utf8', function(err){
             if(err){
                 return console.log(err);
@@ -185,25 +185,22 @@
         }
     });
 
-   app.get('/uploads/img.jpg', function(req,res){
-         var imgNo = req.query.imgNo;
-         try{
+app.get('/uploads/img.jpg', function(req,res){
+    var imgNo = req.query.imgNo;
+    try{
             console.log('Content Request: Image content ...');
             var stats = fs.statSync('./uploads/img-'+ imgNo + '.jpg');
             if(stats.isFile()){
                 res.writeHead(200);
                 res.end();
-            }
-        }
-        catch(e){
-            console.log('Content Request Handled: No image content found ...');
-        }
-    });
+             }
+    }   
+    catch(e){
+        console.log('Content Request Handled: No image content found ...');
+    }
+});
 
-
-    
-
-    app.listen('3000', function(){
+app.listen('3000', function(){
         console.log('running on 3000...');
     });    
 
