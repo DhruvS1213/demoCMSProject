@@ -38,7 +38,8 @@ angular.module('fileDownload', ['ngSanitize', 'ui.bootstrap'])
         url: 'http://localhost:3000/getImageAddress'
     }).then(function successCallback(response)
         {
-            vm.imageArray = response.data.split(',');
+            //vm.imageArray = response.data.split(',');
+            vm.imageArray = response.data;
         }, function errorCallback(error)
         {
             console.log('error');

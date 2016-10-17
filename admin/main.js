@@ -12,7 +12,8 @@ angular.module('authorModule', ['ngFileUpload'])
         url: '/getImageAddress'
     }).then(function successCallback(response){
         console.log('images recieved successfully at admin side');
-        vm.images = response.data.split(',');
+        //vm.images = response.data.split(',');
+        vm.images = response.data;
     }, function errorCallback(error){
         console.log('admin side: error in fetching image address');
     });

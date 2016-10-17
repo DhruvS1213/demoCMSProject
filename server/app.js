@@ -170,10 +170,12 @@
                     if(err){
                         console.log('cannot read selected images file');
                     }
-                imgArray = data;
+                imgArray = data.split(','); 
+                console.log('Image Array length', imgArray.length);
                 if(imgArray.length !== 0){
-                    res.writeHead(200);
-                    res.end(imgArray);
+                   res.writeHead(200, {"Content-Type": "application/json"});
+                   var imgString = JSON.stringify(imgArray);
+                   res.end(imgString);
                 }
              });
             }
