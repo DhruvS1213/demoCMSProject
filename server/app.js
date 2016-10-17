@@ -163,7 +163,7 @@
 
     app.get('/getImageAddress', function(req,res){
         try{
-            var stats = fs.lstatSync('./uploads/selectedImages.txt');
+            var stats = fs.statSync('./uploads/selectedImages.txt');
             if(stats.isFile())
             {
                 fs.readFile('./uploads/selectedImages.txt', "utf8", function (err,data) {
@@ -181,7 +181,7 @@
             }
         }
         catch(e){
-            console.log(e);
+            console.log('No images added yet');
         }
     });
 
