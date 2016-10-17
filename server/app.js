@@ -5,8 +5,7 @@
     var bodyParser = require('body-parser');
     var multer = require('multer');
     var shell = require('shelljs');
-    var imgNo = 1;
-    var imgArray;
+    var imgArray=[];
 
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
@@ -93,9 +92,15 @@
        res.end(index); 
     });
 
-    app.get('/sliderImg', function(req, res){
+    app.get('/selectedImages', function(req, res){
         imgArray = req.query.imgArray;
         console.log(imgArray);
+        fs.writeFile('./uploads/selectedImages.txt', imgArray, 'utf8', function(err){
+            if(err){
+                return console.log(err);
+            }
+            console.log('Stored Path to selected images in text file');
+        });
     });
 
     app.get('/getPage', function(req,res){
@@ -158,9 +163,19 @@
 
     app.get('/getImageAddress', function(req,res){
         try{
-            if(imgArray.length != 0){
-                res.writeHead(200);
-                res.end(imgArray);
+            var stats = fs.lstatSync('./uploads/selectedImages.txt');
+            if(stats.isFile())
+            {
+                fs.readFile('./uploads/selectedImages.txt', "utf8", function (err,data) {
+                    if(err){
+                        console.log('cannot read selected images file');
+                    }
+                imgArray = data;
+                if(imgArray.length !== 0){
+                    res.writeHead(200);
+                    res.end(imgArray);
+                }
+             });
             }
         }
         catch(e){

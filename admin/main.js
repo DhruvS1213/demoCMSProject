@@ -11,6 +11,7 @@ angular.module('authorModule', ['ngFileUpload'])
         method: 'GET',
         url: '/getImageAddress'
     }).then(function successCallback(response){
+        console.log('images recieved successfully at admin side');
         vm.images = response.data.split(',');
     }, function errorCallback(error){
         console.log('admin side: error in fetching image address');
@@ -54,7 +55,7 @@ angular.module('authorModule', ['ngFileUpload'])
     {
         $http({
             method: 'GET',
-            url: 'http://localhost:3000/sliderImg?imgArray='+vm.images
+            url: 'http://localhost:3000/selectedImages?imgArray='+vm.images
         });
         $window.location.href = 'http://localhost:3000/user';
         

@@ -58,31 +58,44 @@
             <br>
 
             <div class="imagepart">
-            <form name="up.upload_form">
-                    <label>Select Image</label>
-                <input 
-                    type="file" 
-                    ngf-select 
-                    ng-model="up.file" 
-                    name="file" 
-                    ngf-pattern="'image/*'"
-                    accept="image/*" 
-                    ngf-max-size="20MB" 
-                    />
-                <br>
-                <div>
-                    <button type = "button" class = "btn btn-primary" ng-click="up.submit(1)" >Upload Image</button>
+                <div class="clearfix">
+                    <div class="col-md-4">
+                        <form name="up.upload_form">
+                                <label>Select Image</label>
+                            <input 
+                                type="file" 
+                                ngf-select 
+                                ng-model="up.file" 
+                                name="file" 
+                                ngf-pattern="'image/*'"
+                                accept="image/*" 
+                                ngf-max-size="20MB" 
+                                />
+                        <br>
+                        <div>
+                            <button type = "button" class = "btn btn-primary" ng-click="up.submit(1)" >Upload Image</button>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-8">
+                        <div ng-repeat="image in up.images track by $index">
+                            <br>
+                            <div class="img-content">
+                                <img ng-src="{{image}}" height="100px" width="100px" />
+                                <button type = "button" class = "btn btn-danger btn-transparent" ng-click="up.remove(image)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p>{{up.progressText1}}</p>
-                <progress class="progbar" min="0" value="{{up.imUploadProgress}}" max="100" ></progress>
-            
+
+                <div class="clearfix">
+                <div class="col-md-8">
+                    <p>{{up.progressText1}}</p>
+                    <progress class="progbar" min="0" value="{{up.imUploadProgress}}" max="100" ></progress>
+                </div>
+                </div>
             </div>
-            
-            <div ng-repeat="image in up.images track by $index">
-            <br>
-                <img ng-src="{{image}}" height="100px" width="100px" />
-                <button type = "button" class = "btn btn-danger" ng-click="up.remove(image)">Delete</button>
-            </div> 
+             
             <br>
 
             <div class="videopart">
