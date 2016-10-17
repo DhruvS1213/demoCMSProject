@@ -68,7 +68,7 @@ angular.module('authorModule', ['ngFileUpload'])
         });
         $window.location.href = 'http://localhost:3000/user';
         
-    }
+    };
 
     vm.fetchText = function(data)
     {
@@ -118,6 +118,10 @@ angular.module('authorModule', ['ngFileUpload'])
                     console.log(demourl + name);
                     vm.images.push(demourl+name);
                     console.log(vm.images);
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:3000/selectedImages?imgArray='+vm.images
+                     });
                 } 
             } else {
                 $window.alert('an error occured');
