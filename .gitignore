@@ -1,14 +1,17 @@
 #NODE_MODULES FOLDERS
 #########################
 /admin/node_modules
-/server/node_modules
+/server-admin/node_modules
+/server-user/node_modules
 /user/node_modules
 
-#Gulp Modules
+#Local Gulp Modules
 #########################
-/server/gulp
-/server/gulp.cmd
+/server-admin/gulp
+/server-admin/gulp.cmd
+/server-user/gulp
+/server-user/gulp.cmd
 
 #Upload FOLDER
 #########################
-/server/uploads/
+/server-admin/uploads/

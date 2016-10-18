@@ -45,6 +45,6 @@ angular.module('previewModule', ['ngSanitize', 'ui.bootstrap'])
             console.log('error');
         });
 
-    vm.videoSRC = "http://localhost:3000/uploads/vid.mp4?t="+ temp;
+    vm.videoSRC =  $sce.trustAsResourceUrl("http://localhost:3000/uploads/vid.mp4?t="+ temp);
 }]);
     

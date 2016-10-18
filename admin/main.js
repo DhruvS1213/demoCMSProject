@@ -66,7 +66,7 @@ angular.module('authorModule', ['ngFileUpload'])
             method: 'GET',
             url: 'http://localhost:3000/selectedImages?imgArray='+vm.images
         });
-        $window.location.href = 'http://localhost:3000/user';
+        $window.location.href = 'http://localhost:4000/user';
         
     };
 

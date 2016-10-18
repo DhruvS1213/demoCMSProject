@@ -1,8 +1,8 @@
 {
-  "name": "expapp",
+  "name": "server-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Serves request of admin page",
+  "main": "server-app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +17,6 @@
     "body-parser": "1.14.1",
     "express": "4.13.3",
     "fs": "0.0.2",
-    "multer": "1.1.0",
-    "shelljs":"0.7.4"
+    "multer": "1.1.0"    
   }
 }
