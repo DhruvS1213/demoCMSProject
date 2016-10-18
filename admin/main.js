@@ -16,7 +16,7 @@ angular.module('authorModule', ['ngFileUpload'])
         console.log(response.data.length);
         console.log('empty-', response.data);
         if(response.data[0] == ''){
-           console.log('No Images added to blog');
+            console.log('No Images added to blog');
         }else{
             vm.images = response.data;
         }
@@ -122,7 +122,6 @@ angular.module('authorModule', ['ngFileUpload'])
                 {
                     console.log(resp.config.data.file.name);
                     name = resp.config.data.file.name;
-
                     console.log(demourl + name);
                     vm.images.push(demourl+name);
                     console.log(vm.images);

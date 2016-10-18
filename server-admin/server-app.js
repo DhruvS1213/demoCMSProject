@@ -6,6 +6,7 @@
     var multer = require('multer');
     
     var imgArray=[];
+    var imgString;
 
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
@@ -76,6 +77,7 @@
     app.get('/deleteImage', function(req,res){
         var fileUrl = url.parse(req.query.fileName).path;
         fs.unlinkSync('.'+fileUrl);
+        res.end();
     });
 
 
@@ -93,7 +95,9 @@
                 return console.log(err);
             }
             console.log('Stored Path to selected images in text file');
+            res.end();
         });
+
     });
 
     app.get('/getPage', function(req,res){
@@ -147,35 +151,44 @@
             {
                 fs.readFile('./uploads/selectedImages.txt', "utf8", function (err,data) {
                     if(err){
-                        console.log('cannot read selected images file');
+                        console.log('try: cannot read selected images file');
+                        imgArray=[];
+                        imgString = JSON.stringify(imgArray);
+                        res.end(imgString);
+                        
                     }
                 imgArray = data.split(','); 
                 console.log('Image Array length', imgArray.length);
                 if(imgArray.length !== 0){
                    res.writeHead(200, {"Content-Type": "application/json"});
-                   var imgString = JSON.stringify(imgArray);
+                   imgString = JSON.stringify(imgArray);
                    res.end(imgString);
                 }
              });
             }
         }
         catch(e){
-            console.log('No images added yet');
+            console.log('catch: No images added yet');
+            imgArray=[];
+            imgString = JSON.stringify(imgArray);
+            res.end(imgString);
         }
     });
 
-app.get('/uploads/img.jpg', function(req,res){
-    var imgNo = req.query.imgNo;
+
+app.get('/uploads/vid.mp4', function(req,res){
     try{
-            console.log('Content Request: Image content ...');
-            var stats = fs.statSync('./uploads/img-'+ imgNo + '.jpg');
-            if(stats.isFile()){
-                res.writeHead(200);
-                res.end();
-             }
-    }   
+        console.log('Content Request: Video Content ...');
+        var stats = fs.statSync('./uploads/vid.mp4');
+        if(stats.isFile()){
+            res.writeHead(200);
+            res.end();
+        }
+    }
     catch(e){
-        console.log('Content Request Handled: No image content found ...');
+        console.log('Content Request Handled: No video content found ...');
+        res.writeHead(200);
+        res.end();
     }
 });
 
