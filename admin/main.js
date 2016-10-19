@@ -51,7 +51,7 @@ angular.module('authorModule', ['ngFileUpload'])
     vm.submit = function(contentType){
         vm.imUploadProgress = 0;
         vm.progressText1 = 0;
-        if (vm.upload_form.file.$valid && vm.file) 
+        if (vm.file) 
         {
             vm.upload(vm.file, contentType); 
         }
