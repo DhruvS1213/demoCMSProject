@@ -1,10 +1,11 @@
 angular.module('authorModule', ['ngFileUpload'])
 
-.controller('uploadCtrl',['Upload','$window','$location', '$http', function(Upload,$window,$location, $http){
+.controller('uploadCtrl',['Upload','$window','$location', '$http', function(Upload, $window, $location, $http){
     console.log('admin-view');
     var vm = this;
     vm.images = [];
     var demourl = 'http://localhost:3000/uploads/'
+
 
 
     $http({
@@ -32,9 +33,7 @@ angular.module('authorModule', ['ngFileUpload'])
         url: '/getHeading'
     }).then(function successCallback(response){
         console.log(response.data);
-        var div = document.createElement("div");
-        div.innerHTML = response.data;
-        vm.heading = div.textContent || div.innerText || "";
+        vm.heading = response.data;
     }, function errorCallback(error){
         console.log(error);
     });
@@ -44,9 +43,7 @@ angular.module('authorModule', ['ngFileUpload'])
         url: '/getPage'
     }).then(function successCallback(response){
         console.log(response.data);
-        var div = document.createElement("div");
-        div.innerHTML = response.data;
-        vm.data = div.textContent || div.innerText || "";
+        vm.data = response.data;
     }, function errorCallback(error){
         console.log(error);
     });
@@ -152,10 +149,7 @@ angular.module('authorModule', ['ngFileUpload'])
                 }            
             });
         };
-}]);
-
-
-    
+}])
 
 
 

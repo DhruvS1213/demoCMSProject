@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="admin.css">
-        <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -25,14 +25,30 @@
                     <label>Enter Heading </label>
                     <textarea ng-model="up.heading" name="userheading"></textarea>
                     <script>
+                        CKEDITOR.plugins.addExternal( 'colorbutton', '/plugins/colorbutton/', 'plugin.js' );
+                        CKEDITOR.plugins.addExternal( 'panelbutton', '/plugins/panelbutton/', 'plugin.js' );
+                        CKEDITOR.plugins.addExternal( 'language', '/plugins/language/', 'plugin.js' );
+                        CKEDITOR.config.colorButton_colors = '000000,B1B3B4,7B0663,E32119,F08A00,89BA17,00625F,00A9D4,FABb00';
+                        CKEDITOR.config.colorButton_foreStyle = {
+                            element: 'span',
+                            styles: { color: '#(color)' }
+                        };
                         CKEDITOR.replace( 'userheading',
 	                    {
-                            toolbar :
+                            extraPlugins: 'colorbutton',
+                            extraPlugins: 'panelbutton',
+                            extraPlugins: 'language',
+                            toolbar : 
                             [
                                 { name: 'basicstyles', items : [ 'Bold','Italic' ] },
-                                { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] }
+                                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+                                { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ]},
+                                { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
                             ]
                         });
+
+                        
+
                     </script>
                 </div>
                 <br>

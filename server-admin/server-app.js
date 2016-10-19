@@ -59,6 +59,7 @@
             if (err) {
                 return console.error(err);
             }
+            res.end();
          });
     });
 
@@ -71,6 +72,7 @@
             if (err) {
                 return console.error(err);
             }
+            res.end();
          });
     });
 

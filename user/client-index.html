@@ -19,14 +19,14 @@
             <div class="clearfix">
                 <div class="col-md-8 no-padding-left">
                     
-                    <h1><p class="headContent" ng-bind-html="uv.userHeadingRequest"></p></h1>
-                    <p class="textContent" ng-bind-html="uv.userContentRequest"></p>
+                    <h1><p class="headContent" ng-bind-html="uv.userHeadingRequest | trustAsHtml"></p></h1>
+                    <p class="textContent" ng-bind-html="uv.userContentRequest | trustAsHtml"></p>
                     <div class="part2 clearfix">
                     <div id="slides_control">
                         <div>
                         <carousel interval="uv.myInterval">
                             <slide ng-repeat="image in uv.imageArray track by $index">
-                                <img ng-src="{{image}}">
+                                <img class="carousel-image" ng-src="{{image}}">
                                 <div class="carousel-caption">
                                     <h4>Demo Image {{$index+1}}</h4>
                                 </div>

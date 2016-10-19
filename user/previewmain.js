@@ -9,11 +9,16 @@ angular.module('previewModule', ['ngSanitize', 'ui.bootstrap'])
     console.log('user-view controller');
     vm.myInterval = 3000;
     
+    vm.h = function(html) {
+        return $sce.trustAsHtml(html);
+    };
+    
     $http({
         method: 'GET',
         url: 'http://localhost:3000/getHeading'
     }).then(function successCallback(resp)
     {
+        console.log("'" + resp.data + "'");
         vm.userHeadingRequest = resp.data;
         console.log('Sucess!!');
     }, function errorCallback(response)
@@ -46,5 +51,8 @@ angular.module('previewModule', ['ngSanitize', 'ui.bootstrap'])
         });
 
     vm.videoSRC =  $sce.trustAsResourceUrl("http://localhost:3000/uploads/vid.mp4?t="+ temp);
-}]);
+}])
     
+.filter('trustAsHtml', function($sce) { 
+    return $sce.trustAsHtml; 
+});
