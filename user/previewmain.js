@@ -9,10 +9,6 @@ angular.module('previewModule', ['ngSanitize', 'ui.bootstrap'])
     console.log('user-view controller');
     vm.myInterval = 3000;
     
-    vm.h = function(html) {
-        return $sce.trustAsHtml(html);
-    };
-    
     $http({
         method: 'GET',
         url: 'http://localhost:3000/getHeading'

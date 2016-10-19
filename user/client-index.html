@@ -21,20 +21,32 @@
                     
                     <h1><p class="headContent" ng-bind-html="uv.userHeadingRequest | trustAsHtml"></p></h1>
                     <p class="textContent" ng-bind-html="uv.userContentRequest | trustAsHtml"></p>
-                    <div class="part2 clearfix">
-                    <div id="slides_control">
-                        <div>
-                        <carousel interval="uv.myInterval">
-                            <slide ng-repeat="image in uv.imageArray track by $index">
-                                <img class="carousel-image" ng-src="{{image}}">
-                                <div class="carousel-caption">
-                                    <h4>Demo Image {{$index+1}}</h4>
-                                </div>
-                            </slide>
-                        </carousel>
+                    <!--Normal Image Display if images are less than 4-->
+                    <div class="part2 clearfix" ng-if="uv.imageArray.length<4">
+                         <div ng-repeat="image in uv.imageArray track by $index">
+                            <div class="col-md-4 no-padding img-wrapper">
+                                <img class="imgContent" ng-src="{{image}}">  
+                                <p class="imgCaption"> Demo Image {{$index+1}} </p>
+                            </div>
                         </div>
                     </div>
+                    <!---->
+                    <!--Carousel only if images are greater than 4-->
+                    <div class="part2 clearfix" ng-if="uv.imageArray.length>3">
+                        <div id="slides_control">
+                            <div>
+                            <carousel interval="uv.myInterval">
+                                <slide ng-repeat="image in uv.imageArray track by $index">
+                                    <img class="carousel-image" ng-src="{{image}}">
+                                    <div class="carousel-caption">
+                                        <h4>Demo Image {{$index+1}}</h4>
+                                    </div>
+                                </slide>
+                            </carousel>
+                            </div>
+                        </div>
                     </div>
+                    <!---->
                 </div>
                 
                 <div class="col-md-4 no-padding-right video-container">
@@ -48,11 +60,7 @@
                 <img class="logoStyle pull-right" src="/img/ericsson-logo.png">
             </div>
         </div>    
-        
-	
-    
-    
-    
+      
     </body>
 	<script type="text/javascript" src="node_modules/angular/angular.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
