@@ -34,7 +34,7 @@
                 cb(null, file.originalname);
             }
             if (extension == 'mp4' || extension == 'ogv' || extension == 'wmv') {
-                cb(null, 'vid.'+extension);
+                cb(null, file.originalname);
             }
         }
     });
@@ -102,6 +102,18 @@
             res.end();
         });
 
+    });
+
+    app.get('/selectedVideos', function(req, res){
+        videoPath = req.query.videoPath;
+        console.log('received video paths', videoPath);
+        fs.writeFile('./uploads/selectedVideos.txt', videoPath, 'utf8', function(err){
+            if(err){
+                return console.log(err);
+            }
+            console.log('Stored path of selected videos in text file');
+            res.end();
+        });
     });
 
     app.get('/uploadImageDescription', function(req, res){
@@ -189,6 +201,37 @@
             imgArray=[];
             imgString = JSON.stringify(imgArray);
             res.end(imgString);
+        }
+    });
+
+    app.get('/getVideoAddress', function(req,res){
+        try{
+            var stats = fs.statSync('./uploads/selectedVideos.txt');
+            if(stats.isFile())
+            {
+                fs.readFile('./uploads/selectedVideos.txt', "utf8", function (err,data) {
+                    if(err){
+                        console.log('try: cannot read selected video file');
+                        videoArray=[];
+                        videoArrayString = JSON.stringify(videoArray);
+                        res.end(imgString);
+                        
+                    }
+                videoArray = data.split(','); 
+                console.log('Video Array length', videoArray.length);
+                if(videoArray.length !== 0){
+                   res.writeHead(200, {"Content-Type": "application/json"});
+                   videoArrayString = JSON.stringify(videoArray);
+                   res.end(videoArrayString);
+                }
+             });
+            }
+        }
+        catch(e){
+            console.log('catch: No Videos added yet');
+            videoArray=[];
+            videoArrayString = JSON.stringify(imgArray);
+            res.end(videoArrayString);
         }
     });
 

@@ -4,10 +4,11 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
     console.log('admin-view');
     var vm = this;
     vm.images = [];
-    //vm.imgDescription = [];
+    vm.videoPath = [];
     vm.accordion=1;
-    //vm.description = [];
+    
     var demourl = 'http://localhost:3000/uploads/'
+
     
     vm.accordianFunction = function(id){
         if(id == 1)
@@ -244,6 +245,19 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
                         url: 'http://localhost:3000/uploadImageDescription?imgDescription=' + vm.imgDescription 
                     });
                 } 
+
+                if(contentType == 2)
+                {
+                    console.log('videoName', resp.config.data.file.name);
+                    name = resp.config.data.file.name;
+                    console.log(demourl + name);
+                    vm.videoPath.push(demourl+name);
+                    console.log(vm.videoPath);
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:3000/selectedVideos?videoPath='+vm.videoPath
+                     });
+                }
             } else {
                 $window.alert('an error occured');
             }
