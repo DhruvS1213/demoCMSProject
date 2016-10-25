@@ -4,6 +4,18 @@
     background-color: #06548A;
 }
 
+.accordian-panel {
+	border: solid;
+	border-color: black;
+	border-radius: 4px;
+	border-width: 1px;
+	padding: 8px;
+}
+
+ul {
+	list-style: none;
+}
+
 .headingpart{
 
 	border: solid;

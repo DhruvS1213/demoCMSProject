@@ -6,11 +6,13 @@
     var multer = require('multer');
     
     var imgArray=[];
+    var imgDescription = [];
     var imgString;
+    var imgDescriptionString;
 
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-        res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+        res.header("Access-Control-Allow-Origin", "http://localhost:8100");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     });
@@ -102,6 +104,19 @@
 
     });
 
+    app.get('/uploadImageDescription', function(req, res){
+        imgDescription = req.query.imgDescription;
+        console.log('recieved descriptions:', imgDescription);
+        fs.writeFile('./uploads/imageDescription.txt', imgDescription, 'utf8', function(err){
+            if(err){
+                return console.log(err)
+            }
+            console.log('Stored Path to selected image description in text file');
+            res.end();
+        });
+        
+    });
+
     app.get('/getPage', function(req,res){
         console.log('Content Request: Blog content ...');
         try{
@@ -176,6 +191,37 @@
             res.end(imgString);
         }
     });
+
+
+    app.get('/getImageDescription', function(req, res){
+        try{
+            var stats = fs.statSync('./uploads/selectedImages.txt');
+            if(stats.isFile()){
+                fs.readFile('./uploads/imageDescription.txt', 'utf8', function(err, data){
+                    if(err){
+                        console.log('try: cannot read image description file');
+                        imgDescription = [];
+                        imgDescriptionString = JSON.stringify(imgDescription);
+                        res.end(imgDescriptionString);
+                    }
+                    imgDescription = data.split(',');
+                    console.log('Image Description Array Length', imgDescription.length);
+                    if(imgDescription.length != 0 )
+                    {
+                        res.writeHead(200, {'Content-type': 'application/json'});
+                        imgDescriptionString =  JSON.stringify(imgDescription);
+                        res.end(imgDescriptionString);
+                    }
+                });
+            }
+        }
+        catch(e){
+            console.log('catch: No image description added yet');
+            imgDescription=[];
+            imgDescriptionString = JSON.stringify(imgArray);
+            res.end(imgDescriptionString);
+        }
+    })
 
 
 app.get('/uploads/vid.mp4', function(req,res){
