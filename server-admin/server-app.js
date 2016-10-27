@@ -9,6 +9,7 @@
     var imgDescription = [];
     var imgString;
     var imgDescriptionString;
+    var imgJSON = [];
 
     app.use(function(req, res, next) { //allow cross origin requests
         res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
@@ -116,17 +117,47 @@
         });
     });
 
-    app.get('/uploadImageDescription', function(req, res){
-        imgDescription = req.query.imgDescription;
-        console.log('recieved descriptions:', imgDescription);
-        fs.writeFile('./uploads/imageDescription.txt', imgDescription, 'utf8', function(err){
-            if(err){
-                return console.log(err)
-            }
-            console.log('Stored Path to selected image description in text file');
-            res.end();
-        });
+    // app.get('/uploadImageDescription', function(req, res){
+    //     imgDescription = req.query.imgDescription;
+    //     console.log('recieved descriptions:', imgDescription);
+    //     fs.writeFile('./uploads/imageDescription.txt', imgDescription, 'utf8', function(err){
+    //         if(err){
+    //             return console.log(err);
+    //         }
+    //         console.log('Stored Path to selected image description in text file');
+    //         res.end();
+    //     });
         
+    // });
+
+    app.get('/uploadImgJSON', function(req, res){
+        imgJSON = JSON.parse(req.query.imgJSON);
+        console.log('recieved image json file');
+        fs.writeFile('./uploads/imgJSON.txt', JSON.stringify(imgJSON), 'utf8', function(err){
+            if(err){
+                return console.log(err);
+            }
+            console.log('Stored Image JSON file');
+        })
+        res.end();
+    });
+
+    app.get('/getImgJSON', function(req, res){
+        try{
+            var stats = fs.lstatSync('./uploads/imgJSON.txt');
+            if(stats.isFile()){
+                fs.readFile('./uploads/imgJSON.txt','utf8' , function(err, data){
+                    imgJSON = JSON.parse(data);
+                    console.log(imgJSON.length);
+                    res.end(JSON.stringify(imgJSON));
+                });
+            }
+        }
+        catch(e){
+            console.log('JSON FILE NOT PRESENT');
+            console.log(e);
+            res.end();
+        }
     });
 
     app.get('/getPage', function(req,res){
@@ -236,35 +267,35 @@
     });
 
 
-    app.get('/getImageDescription', function(req, res){
-        try{
-            var stats = fs.statSync('./uploads/selectedImages.txt');
-            if(stats.isFile()){
-                fs.readFile('./uploads/imageDescription.txt', 'utf8', function(err, data){
-                    if(err){
-                        console.log('try: cannot read image description file');
-                        imgDescription = [];
-                        imgDescriptionString = JSON.stringify(imgDescription);
-                        res.end(imgDescriptionString);
-                    }
-                    imgDescription = data.split(',');
-                    console.log('Image Description Array Length', imgDescription.length);
-                    if(imgDescription.length != 0 )
-                    {
-                        res.writeHead(200, {'Content-type': 'application/json'});
-                        imgDescriptionString =  JSON.stringify(imgDescription);
-                        res.end(imgDescriptionString);
-                    }
-                });
-            }
-        }
-        catch(e){
-            console.log('catch: No image description added yet');
-            imgDescription=[];
-            imgDescriptionString = JSON.stringify(imgArray);
-            res.end(imgDescriptionString);
-        }
-    })
+    // app.get('/getImageDescription', function(req, res){
+    //     try{
+    //         var stats = fs.statSync('./uploads/selectedImages.txt');
+    //         if(stats.isFile()){
+    //             fs.readFile('./uploads/imageDescription.txt', 'utf8', function(err, data){
+    //                 if(err){
+    //                     console.log('try: cannot read image description file');
+    //                     imgDescription = [];
+    //                     imgDescriptionString = JSON.stringify(imgDescription);
+    //                     res.end(imgDescriptionString);
+    //                 }
+    //                 imgDescription = data.split(',');
+    //                 console.log('Image Description Array Length', imgDescription.length);
+    //                 if(imgDescription.length != 0 )
+    //                 {
+    //                     res.writeHead(200, {'Content-type': 'application/json'});
+    //                     imgDescriptionString =  JSON.stringify(imgDescription);
+    //                     res.end(imgDescriptionString);
+    //                 }
+    //             });
+    //         }
+    //     }
+    //     catch(e){
+    //         console.log('catch: No image description added yet');
+    //         imgDescription=[];
+    //         imgDescriptionString = JSON.stringify(imgArray);
+    //         res.end(imgDescriptionString);
+    //     }
+    // });
 
 
 app.get('/uploads/vid.mp4', function(req,res){
