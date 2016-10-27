@@ -4,9 +4,11 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
     console.log('admin-view');
     var vm = this;
     vm.images = [];
+    vm.imgDescription = [];
     vm.videoPath = [];
     vm.accordion=1;
-    
+    vm.imgJSON = [];
+    var flag=0;
     var demourl = 'http://localhost:3000/uploads/'
 
     
@@ -67,23 +69,69 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
 
 
 
-    console.log('Descriptions', vm.desription);
+    // console.log('Descriptions', vm.desription);
 
     
-
+    // Adding description using this function
     vm.addDescription = function(description, index){
         console.log('index', index);
         console.log('description', description)
-        vm.imgDescription[index] = description;
-        console.log(vm.imgDescription);
-        for (desc in vm.imgDescription){
-            console.log(desc + ':' + vm.imgDescription[desc]);
-        }
+        //vm.imgDescription[index] = description;
+       //vm.imgDescription[index] = vm.images[index] + '.txt';
+       tempItem = {}
+       
+     
+     
+       
+            for(var i=0; i<vm.imgJSON.length; i++){
+                console.log('Searching if ID Exists');
+                flag=0;
+                if(vm.imgJSON[i].id == index)
+                {
+                    flag=1;
+                    console.log('i',i);
+                    console.log('id', index);
+                    console.log('ID Exists');
+                    vm.imgJSON[i].description = description;
+                    break;
+                }
+            }
+       
+                
+                
+                
+                if(flag == 0 )
+                {
+                    console.log('flag', flag);
+                    console.log('ID Not found. Creating new');
+                    
+                    console.log('i',i);
+                    console.log('id', index);
+                    tempItem['id'] = index;
+                    tempItem['description'] = description;
+                    vm.imgJSON.push(tempItem);
+                }
+            
+       
+    
+       console.log('json-length', vm.imgJSON.length);
+
+        
+        // console.log(vm.imgDescription);
+        // for (desc in vm.imgDescription){
+        //     console.log(desc + ':' + vm.imgDescription[desc]);
+        // }
+
+        // $http({
+        //     method: 'GET',
+        //     url: 'http://localhost:3000/uploadImageDescription?imgDescription=' + vm.imgDescription 
+        // });
+        //console.log('Descriptions', vm.desription);
+
         $http({
             method: 'GET',
-            url: 'http://localhost:3000/uploadImageDescription?imgDescription=' + vm.imgDescription 
+            url: 'http://localhost:3000/uploadImgJSON?imgJSON='+ JSON.stringify(vm.imgJSON)
         });
-        //console.log('Descriptions', vm.desription);
     }
 
     $http({
@@ -106,21 +154,36 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
     });
 
 
+    // $http({
+    //     method: 'GET',
+    //     url: '/getImageDescription'
+    // }).then(function successCallback(response){
+    //     console.log('image Description recieved');
+    //     if(response.data[0] == ''){
+    //         console.log('No Image Description Added');
+    //     }
+    //     else{
+    //         //vm.description = response.data;
+    //         vm.imgDescription = response.data;
+    //     }
+    // }, function errorCallback(error){
+    //     console.log('admin side: error in fetching image descriptions');
+    // });
+
+
     $http({
         method: 'GET',
-        url: '/getImageDescription'
-    }).then(function successCallback(response){
-        console.log('image Description recieved');
-        if(response.data[0] == ''){
-            console.log('No Image Description Added');
+        url: '/getImgJSON'
+    }).then(function successCallback(res){
+        console.log('json object recieved');
+        vm.imgJSON = res.data;
+        console.log(vm.imgJSON);
+        for(var i=0;i<vm.imgJSON.length;i++)
+        {
+            vm.imgDescription[i] = vm.imgJSON[i].description;
         }
-        else{
-            //vm.description = response.data;
-            vm.imgDescription = response.data;
-        }
-    }, function errorCallback(error){
-        console.log('admin side: error in fetching image descriptions');
     });
+
 
     $http({
         method:'GET',
@@ -185,7 +248,6 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
     vm.remove = function(image) { 
         console.log('delete');
         var index = vm.images.indexOf(image);
-
         console.log('removed-index:', index);
         console.log('deleted image path', vm.images[index]);
         var imagePath = vm.images[index];
@@ -193,8 +255,8 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
         console.log('image path array', vm.images);   
         //vm.description.splice(index,1);  
         vm.imgDescription.splice(index,1);
-        console.log('inside remove');
-        console.log('image description', vm.imgDescription);
+       // console.log('inside remove');
+       // console.log('image description', vm.imgDescription);
         
         $http({
             method: 'GET',
@@ -203,20 +265,32 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
 
         console.log('img array length', vm.images.length);
         //console.log('description array length', vm.description.length);
-        console.log('updated description array');
-        for (desc in vm.imgDescription){
-            console.log(desc + ':' + vm.imgDescription[desc]);
-        }
+        // console.log('updated description array');
+        // for (desc in vm.imgDescription){
+        //     console.log(desc + ':' + vm.imgDescription[desc]);
+        // }
         if(vm.images.length == 0){
             vm.images = [];    
         }
+
+        vm.imgJSON.splice(index,1)
+        for(var i = index ; i<vm.imgJSON.length; i++){
+            console.log('inside for');
+            console.log('id', vm.imgJSON[i].id);
+            vm.imgJSON[i].id = vm.imgJSON[i].id - 1 ;
+        }
+
+        console.log('updated after delete');
+        console.log(vm.imgJSON);
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/uploadImgJSON?imgJSON='+ JSON.stringify(vm.imgJSON)
+        });
+
         $http({
             method: 'GET',
             url: 'http://localhost:3000/selectedImages?imgArray='+ vm.images
-        });
-        $http({
-            method: 'GET',
-            url: 'http://localhost:3000/uploadImageDescription?imgDescription=' + vm.imgDescription 
         });
     };
 
@@ -240,10 +314,6 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
                         method: 'GET',
                         url: 'http://localhost:3000/selectedImages?imgArray='+vm.images
                      });
-                     $http({
-                        method: 'GET',
-                        url: 'http://localhost:3000/uploadImageDescription?imgDescription=' + vm.imgDescription 
-                    });
                 } 
 
                 if(contentType == 2)

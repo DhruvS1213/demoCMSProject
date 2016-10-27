@@ -18,19 +18,28 @@ ul {
 
 .headingpart{
 
-	border: solid;
+	/*border: solid;
 	border-color: black;
 	border-width:1px;
-	border-radius: 4px; 
+	border-radius: 4px; */
 	padding:8px;
+}
+
+.accordian-block{
+
+	font-size: 16px;
+    background-color: #193066;
+    color: white;
+	height:40px;
+
 }
 
 .textpart{
 
-	border: solid;
+	/*border: solid;
 	border-color: black;
 	border-width:1px;
-	border-radius: 4px; 
+	border-radius: 4px; */
 	padding:8px;
 }
 
@@ -51,21 +60,26 @@ ul {
 
 .imagepart{
 
-	border: solid;
+	/*border: solid;
 	border-color: black;
 	border-width:1px;
-	border-radius: 4px; 
+	border-radius: 4px; */
 	padding:8px;
 }
 
 .videopart{
-
+/*
 	border: solid;
 	border-color: black;
 	border-width:1px;
-	border-radius: 4px; 
+	border-radius: 4px; */
 	padding:8px;
 }
+
+.progcss{
+	margin-left: 5px;
+}
+
 #footstrip{
     width: 100%; height: 30px;
     
@@ -82,3 +96,4 @@ ul {
 	width:650px;
 	height: 22px;
 }
+
