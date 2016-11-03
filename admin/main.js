@@ -153,34 +153,20 @@ angular.module('authorModule', ['ui.bootstrap', 'ngFileUpload', 'ngSanitize', 'a
         console.log('admin side: error in fetching image address');
     });
 
-
-    // $http({
-    //     method: 'GET',
-    //     url: '/getImageDescription'
-    // }).then(function successCallback(response){
-    //     console.log('image Description recieved');
-    //     if(response.data[0] == ''){
-    //         console.log('No Image Description Added');
-    //     }
-    //     else{
-    //         //vm.description = response.data;
-    //         vm.imgDescription = response.data;
-    //     }
-    // }, function errorCallback(error){
-    //     console.log('admin side: error in fetching image descriptions');
-    // });
-
-
     $http({
         method: 'GET',
         url: '/getImgJSON'
     }).then(function successCallback(res){
         console.log('json object recieved');
         vm.imgJSON = res.data;
-        console.log(vm.imgJSON);
-        for(var i=0;i<vm.imgJSON.length;i++)
-        {
-            vm.imgDescription[i] = vm.imgJSON[i].description;
+       if(vm.imgJSON.length == 0){
+            vm.imgJSON = [];
+        } 
+        else{
+            for(var i=0;i<vm.imgJSON.length;i++)
+            {
+                vm.imgDescription[i] = vm.imgJSON[i].description;
+            }
         }
     });
 
