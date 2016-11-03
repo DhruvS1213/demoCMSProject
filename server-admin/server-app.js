@@ -34,7 +34,7 @@
             if (extension == 'jpg' || extension == 'png' || extension == 'jpeg' || extension == 'bmp' || extension == 'tiff') {
                 cb(null, file.originalname);
             }
-            if (extension == 'mp4' || extension == 'ogv' || extension == 'wmv') {
+            if (extension == 'mp4' || extension == 'ogv' || extension == 'wmv' || extension == 'webm') {
                 cb(null, file.originalname);
             }
         }
